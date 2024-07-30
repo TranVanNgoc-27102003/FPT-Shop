@@ -1,0 +1,33 @@
+
+.card-header  img{
+    width:50pxpx;
+    height: 50px;
+}
+.card-nav ul li {
+list-style: none;
+float: left;
+}
+.nav a{
+    color:white;
+}
+.header-hinh img{
+    width: 1176px;
+    height: 280px;
+}
+.glyphicons{
+    font-size: 27px;
+}
+.A1> :hover{
+    border: gray solid;
+    box-shadow: 5px 5px 5px rgba(115, 114, 114, 0.3);
+}
+.A2:hover{
+    transform: scale(1.1);
+}
+.A3:hover{
+    border: rgb(215, 213, 213) solid ;
+    
+}
+.S2 a :hover{
+    color: blue;
+    }

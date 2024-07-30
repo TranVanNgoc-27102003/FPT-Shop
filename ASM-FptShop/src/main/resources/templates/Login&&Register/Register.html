@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+<link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form th:action="@{/Account/register}" th:object="${Account}" method="post">
+
+                    <h2>Register</h2>
+                    <div class="inputbox">
+                        <i class="bi bi-envelope-fill"></i>
+                        <input th:field="*{Email}" type="email" required>
+                        <label for="">Email</label>
+                    </div>
+                    <div class="inputbox">
+                        <i class="bi bi-lock-fill"></i>
+                        <input  th:field="*{PassWord}"type="password" required>
+                        <label for="">Password</label>
+                    </div>
+                    <div class="inputbox">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        <input name="configPassword" type="password" required>
+                        <label for="">Confirm Password</label>
+                    </div>
+                    <br>
+                    <button>Register</button>
+                     <h5 style="text-align: center;color: black;font-size: 20px">[[${messages}]]</h5>
+                    <div class="register">
+                        <p>Do you want <a th:href="@{/Account/login/show}">Log in</a></p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

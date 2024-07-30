@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Shopping cart information</title>
+<link rel="stylesheet" th:href="@{/css/cart.css}">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript"
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<div class="card">
+		<div class="row">
+			<div class="col-md-8 cart">
+				<div class="title">
+					<div class="row">
+						<div class="col">
+
+							<h4>
+								<b>Shopping Cart</b>
+							</h4>
+						</div>
+						<div class="back-to-shop">
+							<a th:href="@{/User/Products/Show}">&leftarrow;<span
+								class="text-muted">Back to shop</span></a> <a
+								th:href="@{/cart/clear}" style="color: #606060;"> Clear Cart
+							</a>
+						</div>
+						<div class="col align-self-center text-right text-muted">
+							<!-- ${Count} items -->
+						</div>
+					</div>
+				</div>
+				<input type="hidden" th:value="${cart}" name="cart">
+				<div th:each=" items : ${cart}">
+
+
+					<input type="hidden" name="id" value="${items.CartId}">
+					<div class="row border-top border-bottom">
+						<div class="row main align-items-center"
+							th:if="${items.product != null}" th:object="${items.product} ">
+
+							<div class="col-2">
+								<img class="img-fluid"
+									th:src="@{/images/{image} (image=*{Image})}">
+							</div>
+							<div class="col">
+								<div class="row text-muted">Price:
+									[[*{#numbers.formatCurrency(Price)}]]</div>
+								<div class="row">[[*{ProductName}]]</div>
+							</div>
+
+
+							<div class="col">
+								<a th:href="@{/cart/-/{id} (id=${items.CartId})}">-</a><a
+									href="#" class="border" name="qty">[[${items.Quantity}]]</a> <a
+									th:href="@{/cart/+/{id} (id=${items.CartId})}">+</a>
+							</div>
+
+							<div class="col">
+							
+								<span
+									th:text="${#numbers.formatCurrency(items.product.Price * items.Quantity)}"></span>
+								<a th:href="@{/cart/remove/{id}(id=${items.CartId})}"><span
+									class="close">&#10005;</span></a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="col-md-4 summary">
+				<div>
+					<h5>
+						<b>Summary</b>
+					</h5>
+				</div>
+				<div class="row">
+					<div class="col" style="padding-left: 14;">ITEMS:
+						[[${count}]]</div>
+					<div class="col text-right"></div>
+				</div>
+				<form>
+					<p>SHIPPING</p>
+					<select><option class="text-muted">Standard-Delivery-
+							&euro;5.00</option></select>
+					<p>GIVE CODE</p>
+					<input id="code" placeholder="Enter your code">
+				</form>
+				<div class="row"
+					style="border-top: 1px solid rgba(0, 0, 0, .1); padding: 2vh 0;">
+					<div class="col">TOTAL PRICE:</div>
+
+					<div class="col text-right">
+						[[${#numbers.formatCurrency(SumTotal)}]]</div>
+				</div>
+			 
+
+				<form th:action="@{/cart/pay}">
+				
+					<input type="hidden" name="SumTotal" th:value="${SumTotal}">
+					<button type="submit" class="btn btn-danger">Thanh toán</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
